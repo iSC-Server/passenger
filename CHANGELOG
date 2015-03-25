@@ -1,3 +1,8 @@
+Release 5.0.6
+-------------
+ * More informative error message if a support binary is not found, including a resolution hint. Closes GH-1395. 
+
+
 Release 5.0.5
 -------------
 

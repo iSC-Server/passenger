@@ -312,7 +312,14 @@ public:
 		this_thread::disable_interruption di;
 		this_thread::disable_syscall_interruption dsi;
 		ResourceLocator locator(passengerRoot);
-		string agentFilename = locator.findSupportBinary(AGENT_EXE);
+
+		string agentFilename;
+		try {
+			agentFilename = locator.findSupportBinary(AGENT_EXE);
+		} catch (const Passenger::RuntimeException &e) {
+			string locatorError = e.what();
+			throw RuntimeException(locatorError + "; check " + (AS_APACHE ? "PassengerRoot" : "passenger_root") + " setting");
+		}
 		SocketPair fds;
 		int e;
 		pid_t pid;
