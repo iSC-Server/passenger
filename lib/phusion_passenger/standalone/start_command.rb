@@ -149,10 +149,10 @@ module PhusionPassenger
           opts.on("--log-file FILENAME", String,
             "Where to write log messages. Default:#{nl}" +
             "console, or /dev/null when daemonized") do |value|
-            options[:log_file] = value
+            options[:log_file] = File.absolute_path_no_resolve(value)
           end
           opts.on("--pid-file FILENAME", String, "Where to store the PID file") do |value|
-            options[:pid_file] = value
+            options[:pid_file] = File.absolute_path_no_resolve(value)
           end
           opts.on("--instance-registry-dir PATH", String,
             "Use the given instance registry directory") do |value|
